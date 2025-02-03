@@ -86,15 +86,6 @@ section {
   padding: 2rem 0;
 }
 
-/* Footer */
-/* footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
-} */
-
 /* Key Research Interests */
 .key-research {
   background-color: #fff;
@@ -185,8 +176,6 @@ section {
 }
 
 .partners-container img {
-  /* max-width: 150px;
-  height: auto; */
   width: auto;
   max-height: 125px;
   transition: transform 0.3s ease-in-out;
@@ -205,6 +194,13 @@ footer {
 }
 
 /* Social Media Icons */
+.social-links a {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
 .social-icons {
   margin-top: 1rem;
   text-align: center;
@@ -216,6 +212,7 @@ footer {
   color: #fff;
   text-decoration: none;
   transition: colour 0.3s ease, transform 0.3s ease;
+  display: inline-block;
 }
 
 .social-icons a:hover {
