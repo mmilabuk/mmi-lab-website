@@ -367,4 +367,80 @@ a:link, a:visited {
   color: unset;
 }
 
+/* Events */
+/* Events Calendar Section */
+.events-calendar h2 {
+  text-align: center;
+  color: #004080;  /* Matching key-research header color */
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
 
+.events-calendar table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fee3a1;  /* Matching news-list background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.events-calendar th, 
+.events-calendar td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.events-calendar th {
+  background-color: #00539C;  /* Matching header/nav background */
+  color: white;
+  text-transform: uppercase;
+}
+
+.events-calendar tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.events-calendar tbody tr:hover {
+  background-color: #ffcc00;  /* Consistent hover effect with nav links */
+}
+
+/* Highlight Today and Next Event */
+.highlight-today {
+  background-color: #92c0f2;  /* Consistent with publication button */
+  color: #333;
+}
+
+.highlight-next-event {
+  background-color: #c8e6c9;  /* Subtle green highlight */
+  color: #333;
+}
+
+/* Ensure consistent container spacing */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+/* Footer Consistency */
+footer {
+  background-color: #004080;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+footer .social-icons a {
+  color: white;
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+footer .social-icons a:hover {
+  color: #ffcc00;  /* Hover effect matching nav links */
+  transform: scale(1.2);
+}

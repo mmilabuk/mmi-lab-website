@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIL UK - Events</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="events-calendar" class="events-calendar">
+      <div class="container">
+        <h2>Lab Meetings</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Presenter(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-date="2024-11-28">
+              <td>November 28, 2024</td>
+              <td>Qiyue</td>
+            </tr>
+            <tr data-date="2024-12-11">
+              <td>December 15, 2024</td>
+              <td>Yuchen, Ming and Jiangbei</td>
+            </tr>
+            <tr data-date="2025-01-14">
+              <td>January 14, 2025</td>
+              <td>Yuchen and Rahul</td>
+            </tr>
+            <tr data-date="2024-02-11">
+              <td>February 11 2025</td>
+              <td>Yueming and Zhufeng</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="events-calendar" class="events-calendar">
+      <div class="container">
+        <h2>Seminars and Conferences</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-date="2025-02-25">
+              <td>25 Feb - 4 March 2025</td>
+              <td>The 39th Annual AAAI Conference in Artifical Intelligence | Philadelphia, Pennsylvania, USA</td>
+              <td>It aims to promote AI research and encourage the exchange of scientific research between researchers, scientists, practitioners, engineers, and students from across the AI disciplines.</td>
+            </tr>
+            <tr data-date="2025-06-09">
+              <td>9 - 12 June 2025</td>
+              <td>The Data + AI Summit 2025 | San Francisco & Virtual, USA</td>
+              <td>Key AI information, such as global data and analytics, will be shared amongst the AI community, helping to explore the latest advancements within this sector.</td>
+            </tr>
+            <tr data-date="2025-06-11">
+              <td>11 - 12 June 2025</td>
+              <td>The AI Summit | London UK</td>
+              <td>Its goal is to convert theoretical discussions surrounding AI into profitable and practical applications.</td>
+            </tr>
+            <tr data-date="2025-06-18">
+              <td>18 - 19 June 2025</td>
+              <td>Super AI | Marina Bay Sands, Singapore</td>
+              <td>It aims to define the future of artificial intelligence by bringing together industry leaders, entrepreneurs, heads of state, AI researchers, scientists and enthusiasts from around the world; to unpick and define the future of artificial intelligence while getting to grips with the next wave of transformative AI.</td>
+            </tr>
+            <tr data-date="2025-08-11">
+              <td>11 - 13 August 2025</td>
+              <td>Ai4 2025 | Las Vegas, USA</td>
+              <td>The conference will feature the latest developments and advancements in AI, including generative AI and AI agents, with content tailored for technical and business leaders across multiple sectors.</td>
+            </tr>
+            <tr data-date="2025-10-08">
+              <td>8 - 9 October 2025</td>
+              <td>The World Summit AI 2025 | Amsterdam, Netherlands</td>
+              <td>The World Summit AI events will explore the AI sector in depth through Tech Talks, Moonshots, Responsible AI, the Metaverse, and, of course, much more.</td>
+            </tr>
+            <tr data-date="2025-10-08">
+              <td>18 - 21 November 2025</td>
+              <td>The Big Data Conference Europe 2025 | Vilnius, Lithuania & Virtual</td>
+              <td>The event has been devised to inform, educate, and inspire all those who are passionate about Data Exploration, AI, and Big Data.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="social-icons">
+        <a href="mailto:mmi.lab.uk@gmail.com" target="_blank" aria-label="Email">
+          <i class="fa fa-envelope"></i>
+        </a>
+        <a href="https://github.com/mmilabuk" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://x.com/mmi_lab_uk" target="_blank" aria-label="X">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/multimodal-intelligence-lab-uk-92a590349/" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.youtube.com/@mmi_lab_uk" target="_blank" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+      <p>&copy; 2025 Multimodal Intelligence Lab, University of Exeter. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const today = new Date().toISOString().split('T')[0];
+      let nextEventDate = null;
+      let nextEventRow = null;
+
+      document.querySelectorAll('#events-calendar tbody tr').forEach(row => {
+        const eventDate = row.getAttribute('data-date');
+
+        if (eventDate === today) {
+          row.classList.add('highlight-today');
+        }
+
+        if (!nextEventDate && eventDate > today) {
+          nextEventDate = eventDate;
+          nextEventRow = row;
+        }
+      });
+
+      if (nextEventRow) {
+        nextEventRow.classList.add('highlight-next-event');
+      }
+    });
+  </script>
+</body>
+</html>
