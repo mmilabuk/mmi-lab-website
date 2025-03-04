@@ -442,14 +442,16 @@ a:link, a:visited {
 
 /* Events */
 /* Events Calendar Section */
-.events-calendar h2 {
+.events-calendar h2,
+.important-deadlines h2 {
   text-align: center;
   color: #004080;  /* Matching key-research header color */
   margin-bottom: 1.5rem;
   font-size: 2rem;
 }
 
-.events-calendar table {
+.events-calendar table,
+.important-deadlines table {
   width: 100%;
   border-collapse: collapse;
   background-color: #fee3a1;  /* Matching news-list background */
@@ -459,24 +461,63 @@ a:link, a:visited {
 }
 
 .events-calendar th, 
-.events-calendar td {
+.important-deadlines th,
+.events-calendar td,
+.important-deadlines td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-.events-calendar th {
+.events-calendar th,
+.important-deadlines th {
   background-color: #00539C;  /* Matching header/nav background */
   color: white;
   text-transform: uppercase;
 }
 
-.events-calendar tbody tr {
+.events-calendar tbody tr,
+.important-deadlines tbody tr {
   transition: background-color 0.3s ease;
 }
 
-.events-calendar tbody tr:hover {
+.events-calendar tbody tr:hover,
+.important-deadlines tbody tr:hover {
   background-color: #ffcc00;  /* Consistent hover effect with nav links */
+}
+
+/* Dropdown Styling */
+#conference-type {
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Separation between Conference Types */
+tbody tr:first-of-type,
+tbody tr[data-type="AI"] + tr[data-type="ML"],
+tbody tr[data-type="ML"] + tr[data-type="NLP"] {
+  border-top: 3px solid #000;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  table {
+    font-size: 14px;
+  }
+
+  #conference-type {
+    width: 100%;
+  }
+}
+
+/* Passed deadline styling */
+.expired {
+  text-decoration: line-through;
+  color: #888;
 }
 
 /* Highlight Today and Next Event */

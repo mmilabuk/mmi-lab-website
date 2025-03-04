@@ -61,40 +61,93 @@
       </div>
     </section>
 
-    <section id="events-calendar" class="events-calendar">
+    <section id="important-deadlines" class="important-deadlines">
       <div class="container">
-        <h2>Deadlines for Submissions in AI Conferences in 2025</h2>
+        <h2>Deadlines for Submissions in Conferences in 2025</h2>
+    
+        <!-- Dropdown to filter conference types -->
+        <label for="conference-type">Select Conference Type:</label>
+        <select id="conference-type">
+          <option value="all">All</option>
+          <option value="AI">AI</option>
+          <option value="ML">ML</option>
+          <option value="NLP">NLP</option>
+        </select>
+    
         <table>
           <thead>
             <tr>
               <th>Conference</th>
-              <th>Important Deadlines</th>
+              <th>Type</th>
+              <th>Abstract Submission</th>
+              <th>Full Paper Submission</th>
             </tr>
           </thead>
           <tbody>
-            <tr data-date="2025-01-16">
+            <!-- AI Conferences -->
+            <tr data-type="AI">
               <td><a href="https://2025.ijcai.org/" target="_blank">IJCAI 2025</a></td>
-              <td>
-                <ul>
-                  <li><b>Abstract submission deadline:</b> January 16</li>
-                  <li><b>Author information and Full paper submission deadline (including Appendix and resubmission information):</b> January 23</li>
-                </ul>
+              <td>AI</td>
+              <td>16 January</td>
+              <td>23 January</td>
             </tr>
-            <tr data-date="2025-04-29">
+            <tr data-type="AI">
               <td><a href="https://ecai2025.org/" target="_blank">ECCAI 2025</a></td>
-              <td>
-                <ul>
-                  <li><b>Abstract submission:</b> 29 April</li>
-                  <li><b>Paper deadline:</b> 6 May</li>
-                </ul>
+              <td>AI</td>
+              <td>29 April</td>
+              <td>6 May</td>
             </tr>
-            <tr data-date="2025-07-08">
+            <tr data-type="AI">
               <td><a href="https://aaai.org/conference/aaai/aaai-25/" target="_blank">AAAI 2025</a></td>
-              <td>
-                <ul>
-                  <li><b>Abstract submission:</b> 7 August</li>
-                  <li><b>Paper deadline:</b> 15 August</li>
-                </ul>
+              <td>AI</td>
+              <td>7 August</td>
+              <td>15 August</td>
+            </tr>
+    
+            <!-- ML Conferences -->
+            <tr data-type="ML">
+              <td><a href="https://neurips.cc/" target="_blank">NeurIPS 2025</a></td>
+              <td>ML</td>
+              <td>11 May</td>
+              <td>15 May</td>
+            </tr>
+            <tr data-type="ML">
+              <td><a href="https://icml.cc/" target="_blank">ICML 2025</a></td>
+              <td>ML</td>
+              <td>23 January</td>
+              <td>30 January</td>
+            </tr>
+            <tr data-type="ML">
+              <td><a href="https://2025.automl.cc/dates/" target="_blank">AutoML 2025</a></td>
+              <td>ML</td>
+              <td>26 March</td>
+              <td>26 March</td>
+            </tr>
+            <tr data-type="ML">
+              <td><a href="https://ecmlpkdd.org/2025/" target="_blank">ECMLPKDD 2025</a></td>
+              <td>ML</td>
+              <td>7 March</td>
+              <td>14 March</td>
+            </tr>
+            <tr data-type="ML">
+              <td><a href="https://www.auai.org/uai2025/" target="_blank">UAI 2025</a></td>
+              <td>ML</td>
+              <td>10 February</td>
+              <td>10 February</td>
+            </tr>
+    
+            <!-- NLP Conferences -->
+            <tr data-type="NLP">
+              <td><a href="https://2025.aclweb.org/" target="_blank">ACL 2025</a></td>
+              <td>NLP</td>
+              <td>15 February</td>
+              <td>15 February</td>
+            </tr>
+            <tr data-type="NLP">
+              <td><a href="https://2025.emnlp.org/" target="_blank">EMNLP 2025</a></td>
+              <td>NLP</td>
+              <td>19 May</td>
+              <td>19 May</td>
             </tr>
           </tbody>
         </table>
@@ -200,6 +253,51 @@
         nextEventRow.classList.add('highlight-next-event');
       }
     });
+
+    document.getElementById('conference-type').addEventListener('change', function() {
+      const selectedType = this.value;
+      const rows = document.querySelectorAll('.important-deadlines tbody tr');
+
+      let lastType = ''; // Track last displayed type to maintain separation
+      rows.forEach(row => {
+          const rowType = row.getAttribute('data-type');
+
+          if (selectedType === 'all' || rowType === selectedType) {
+              row.style.display = '';
+              if (lastType !== rowType) {
+                  row.style.borderTop = '3px solid #000'; // Add separation
+              } else {
+                  row.style.borderTop = 'none';
+              }
+              lastType = rowType;
+          } else {
+              row.style.display = 'none';
+          }
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date();
+
+    document.querySelectorAll('.important-deadlines tbody tr').forEach(row => {
+        const abstractDateText = row.children[2].textContent.trim(); 
+        const fullPaperDateText = row.children[3].textContent.trim();
+
+        // Convert dates to Date objects
+        const abstractDate = new Date(`${abstractDateText} 2025`);
+        const fullPaperDate = new Date(`${fullPaperDateText} 2025`);
+
+        if (abstractDate < today) {
+            row.children[2].style.textDecoration = 'line-through'; // Strike abstract date
+            row.children[2].style.color = '#888'; // Grey out for clarity
+        }
+        if (abstractDate < today && fullPaperDate < today) {
+            row.style.textDecoration = 'line-through'; // Strike the whole row
+            row.style.color = '#888'; // Grey out for clarity
+        }
+    });
+  });
+
   </script>
 </body>
 </html>
