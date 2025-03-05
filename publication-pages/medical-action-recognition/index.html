@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Position and Orientation Aware One-Shot Learning for Medical Action Recognition from Signal Data</title>
+  <link rel="stylesheet" href="styles/styles.css"></link>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Position and Orientation Aware One-Shot Learning for Medical Action Recognition from Signal Data</h1>
+      <p class="subtitle">A position and orientationaware one-shot learning framework for medical action recognition from signal data</p>
+    </header>
+    
+    <nav>
+      <ul>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#method">Proposed Method</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contributors">Contributors</a></li>
+      </ul>
+    </nav>
+    
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        In this work, we propose a position and orientation-aware one-shot learning framework for medical action recognition from signal data. The proposed framework comprises two stages and each stage includes signal-level image generation (SIG), cross-attention (CsA), and dynamic time warping (DTW) modules and the information fusion between the proposed privacy-preserved position and orientation features. The proposed SIG method aims to transform the raw skeleton data into privacy-preserved features for training. The CsA module is developed to guide the network in reducing medical action recognition bias and more focusing on important human body parts for each specific action, aimed at addressing similar medical action related issues. Moreover, the DTW module is employed to minimize temporal mismatching between instances and further improve model performance. Furthermore, the proposed privacy-preserved orientation-level features are utilized to assist the position-level features in both of the two stages for enhancing medical action recognition performance. Extensive experimental results on the widely-used and well-known NTU RGB+D 60, NTU RGB+D 120, and PKU-MMD datasets all demonstrate the effectiveness of the proposed method, which outperforms the other state-of-the-art methods with general dataset partitioning by 2.7%, 6.2% and 4.1%, respectively.
+      </p>
+    </section>
+
+    <div class="figure-placeholder" id="figure-modal-trigger">
+      <figure>
+        <img src="assets/fig6.jpg" alt="System Architecture Diagram - Figure 6" class="enlargeable-image">
+        <figcaption>Figure 6: The single-stream illustration of the proposed one-shot learning approach. (1) The SIG module first     transforms the input skeleton sequences into signal-level images before being fed into the ResNet18 encoder with the CsA module for feature extraction. (2) The CsA module enables information communication between the support and query sets, this allows the query instance to know which part is important to the support instance or vice versa. (3) The DTW module is exploited to address the temporal information mismatching issue via equations (6) and (7). The encoded features from both support and query sets are applied for metric learning in the ProtoNet framework [42]. The vectors from the support and query set are finally mapped to the feature space for similarity calculation and yield the final results.</figcaption>
+        <figcaption>Click to Enlarge</figcaption>
+      </figure>
+    </div>
+    
+    <!-- Modal for Image Enlargement -->
+    <div id="imageModal" class="image-modal">
+      <span class="modal-close">&times;</span>
+      <img class="modal-content" id="modalImage">
+    </div>
+    
+    <section id="method">
+      <h2>Proposed Method</h2>
+      <p>
+        In our proposed POA-OSL, the position and orientation features are firstly extracted from the raw skeleton sequences for a better representation of human actions. The SIG module is then utilized for mitigating the privacy information. After
+        that, the CsA and the DTW modules are applied to address the similar action and temporal mismatching issue, respectively.
+        Subsequently, the orientation feature-assisted training method is introduced which consists of multiple-level fusion. Finally, the ProtoNet based model is selected for obtaining the experimental results.
+      </p>
+      
+      <ol class="method-steps">
+        <li>
+          <strong>Signal Images Transformation (Stage 1):</strong> Based on the human physical structures, we manually design the human bones from the landmarks in the raw skeleton sequences. In order to obtain different types of human action features from the raw skeleton sequences, the angles of the human bones are extracted as the orientation features for assisting the training process.
+        </li>
+        <li>
+          <strong>Cross Attention Mechanism (Stage 2):</strong> fter transferring the skeleton sequence into the signal-level
+          representation, a cross-attention module between the support set and query set is exploited in the proposed framework. In previous cross-attention approaches, typically, only one of the two modules involved in the computation was focused. The aim of cross-attention is to guide the network to give more attention to the important parts rather than the other parts. This mechanism could decrease the difficulties in discriminating against similar medical actions.
+        </li>
+        <li>
+          <strong>Dynamic Time Warping (Stage 3):</strong> There exist several factors (e.g. different experimental subjects, speed, duration of the recording and action timing) that result in the temporal information mismatching issue between
+          the support set and query set actions.
+        </li>
+        <li>
+          <strong>Orientation-level Feature Assisted Training (Stage 3):</strong> Due to the raw data utilized, which only consists of coordinate position information for human landmarks, relying solely on a single-level feature for action recognition is insufficient to capture comprehensive action characteristics. Therefore, we propose an orientation-level assisted training approach to enhance the model performance in different stages, which primarily consists of both early fusion and late fusion methods.
+        </li>
+        <li>
+          <strong>Abnormality Detection:</strong> In the final decision-making stage, the system makes a determination on the abnormality of events at the frame level. This is done based on the integrated normality scores from the ST-GCAE and the object detection module. An event is flagged as abnormal if it deviates significantly from the learned normal patterns.
+        </li>
+      </ol>
+    </section>
+    
+    <section id="results">
+      <h2>Results</h2>
+      <div class="results">
+        <p>
+          In this section, we conduct the experiments on three public datasets which are most widely used and well-known for
+          action recognition tasks including NTU-60, NTU-120 and PKU-MMD. The quantitative results are also presented to
+          compare with the other SOTA one-shot learning methods for human action recognition. Moreover, we design experiments
+          for specific medical actions analyzing as well as the result visualisation. Furthermore, we carry out ablation studies to demonstrate the effectiveness of transformed features, the proposed CsA and DTW modules. Finally, the experiments
+          for different parameter settings are presented.
+        </p>
+
+        <div class="figure-placeholder" id="figure-modal-trigger">
+          <figure>
+            <img src="assets/tableV.jpg" alt="System Architecture Diagram - Table V" class="enlargeable-image">
+            <figcaption>Table V: The proposed POA-OSL performance on the specific classes on NTU-60, NTU-120 and PKU-MMD datasets for 5-way-1-shot medical action recognition with Top 1 Accuracy (%). The w/o CsA indicates the model only contains the DTW module and w/ CsA indicates the model contains both DTW and CsA modules.</figcaption>
+          </figure>
+        </div>
+
+        <p>As we can see from Table V, both cough and chest pain are
+          the most difficult medical actions to recognize. The reason for
+          this is that both the movements of these two medical actions
+          are slight in both spatial and temporal dimensions. In contrast,
+          the staggering and falling achieve the most and the second-
+          most promising accuracy on the NTU-120 dataset, which are
+          95.7% and 99.5%, respectively. It could be observed that
+          the performance of headache from PKU-MMD is remarkably
+          improved from 50.1% to 69.7% by applying the proposed
+          POA-OSL (MF), which further verifies that POA-OSL could
+          enhance the discriminating ability on different datasets..</p>
+      </div>
+    </section>
+
+    <!-- Modal for Image Enlargement -->
+    <div id="imageModal" class="image-modal">
+      <span class="modal-close">&times;</span>
+      <img class="modal-content" id="modalImage">
+    </div>
+    
+    <section id="contributors">
+      <h2>Contributors</h2>
+      <div class="contributors">
+        <div class="contributor">
+          <img src="assets/contri-1.jpg" alt="Leiyu Xie">
+          <div class="contributor-name">Leiyu Xie</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-2.jpg" alt="Yuxing Yang">
+          <div class="contributor-name">Yuxing Yang</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-3.jpg" alt="Zeyu Fu">
+          <div class="contributor-name">Zeyu Fu</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-4.jpg" alt="Syed Mohsen Naqvi">
+          <div class="contributor-name">Syed Mohsen Naqvi</div>
+        </div>
+      </div>
+
+      <section id="publication" class="publication-section">
+        <div class="publication-links">
+          <a href="https://dx.doi.org/10.1109/tmm.2024.3521703" target="_blank" class="read-more">View Paper</a>
+          <button class="toggle-bibtex" onclick="toggleBibtex(this)">Show BibTeX</button>
+        </div>
+        <pre class="bibtex-content">@ARTICLE{10814994,
+          author={Xie, Leiyu and Yang, Yuxing and Fu, Zeyu and Naqvi, Syed Mohsen},
+          journal={IEEE Transactions on Multimedia}, 
+          title={Position and Orientation Aware One-Shot Learning for Medical Action Recognition from Signal Data}, 
+          year={2024},
+          volume={},
+          number={},
+          pages={1-14},
+          keywords={Feature extraction;Biomedical imaging;Skeleton;One shot learning;Training;Human activity recognition;Privacy;Data models;Protection;Data privacy;One-shot learning;medical action recognition;attention mechanism;feature fusion;healthcare},
+          doi={10.1109/TMM.2024.3521703}} 
+        </pre>
+    </section>
+
+    <footer>
+      <p>© 2025 Multimodal Intelligence Lab, UK | Department of Computer Science, University of Exeter</p>
+    </footer>
+
+    <script>
+      // Image Modal Functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.modal-close');
+        const enlargeableImages = document.querySelectorAll('.enlargeable-image');
+
+        // Add click event to all enlargeable images
+        enlargeableImages.forEach(img => {
+          img.addEventListener('click', function() {
+            modal.style.display = 'block';
+            modalImage.src = this.src;
+          });
+        });
+
+        // Close modal when clicking close button
+        closeBtn.onclick = function() {
+          modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        modal.onclick = function(event) {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+          }
+        });
+      });
+
+      // BibTeX Toggle Function
+      function toggleBibtex(button) {
+        const bibtexContent = button.closest('#publication').querySelector('.bibtex-content');
+        if (bibtexContent.style.display === 'none') {
+          bibtexContent.style.display = 'block';
+          button.textContent = 'Hide BibTeX';
+        } else {
+          bibtexContent.style.display = 'none';
+          button.textContent = 'Show BibTeX';
+        }
+      }
+    </script>
+  
+  </div>
+</body>
+</html>
