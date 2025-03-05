@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pose-Oriented Scene-Adaptive Matching for Abnormal Event Detection</title>
+  <link rel="stylesheet" href="syles/styles.css"></link>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pose-Oriented Scene-Adaptive Matching for Abnormal Event Detection</h1>
+      <p class="subtitle">A Novel Framework for Intelligent Surveillance Systems</p>
+    </header>
+    
+    <nav>
+      <ul>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#method">Proposed Method</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contributors">Contributors</a></li>
+      </ul>
+    </nav>
+    
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        For intelligent surveillance systems, <span class="highlight">abnormal event detection</span> automatically analyses surveillance video sequences and detects abnormal objects or unusual human actions at the frame level. Due to the lack of labelled data, most approaches are semi-supervised based on reconstruction or prediction methods. However, these methods may not generalize well to unseen scene contexts.
+      </p>
+      <p>
+        To address this issue, we present a novel <span class="highlight">self and mutual scene-adaptive matching method</span> for abnormal event detection. In the framework, we propose synergistic pose estimation and object detection, which effectively integrates human pose and object detection information to improve pose estimation accuracy. Then, the poses are resized to reduce the spatial distance between the source and target domains.
+      </p>
+      <p>
+        The improved pose sequences are further fed into a spatio-temporal graph convolutional network to extract the geometric features. Finally, the features are embedded in a clustering layer to classify action types and compute normality scores.
+      </p>
+      <p>
+        The training data is taken from the training part of common video anomaly detection datasets: UCSD PED1 & PED2, CHUK Avenue, and ShanghaiTech Campus. The proposed framework is evaluated on video sequences with unseen scene contexts in the UCSD PED2 and ShanghaiTech Campus datasets.
+      </p>
+      <p>
+        The detection accuracy and efficiency are also evaluated in detail, and the proposed method for abnormal event detection achieves the highest AUC performance, <strong>84.6%</strong>, on the ShanghaiTech Campus dataset and relatively high AUC performance, <strong>96.9%</strong> and <strong>74.8%</strong>, on UCSD PED2 & PED1 datasets. Compared with other state-of-the-art works, the performance analysis and results confirm the robustness and effectiveness of our proposed framework for cross-scene abnormal event detection.
+      </p>
+    </section>
+
+    <div class="figure-placeholder" id="figure-modal-trigger">
+      <figure>
+        <img src="assets/fig3.jpg" alt="System Architecture Diagram - Figure 3">
+        <figcaption>Figure 3: System Architecture Diagram</figcaption>
+        <figcaption>Click to Enlarge</figcaption>
+      </figure>
+    </div>
+    
+    <!-- Modal for Image Enlargement -->
+    <div id="imageModal" class="image-modal">
+      <span class="modal-close">&times;</span>
+      <img class="modal-content" id="modalImage">
+    </div>
+    
+    <section id="method">
+      <h2>Proposed Method</h2>
+      <p>
+        This paper presents a novel, scene-adaptive framework that addresses the challenges in the existing AED methods by integrating human pose estimation and object detection. Our approach pipeline is illustrated in Fig. 3, which consists of several key steps, each serving a unique function in our system's architecture.
+      </p>
+      
+      <ol class="method-steps">
+        <li>
+          <strong>Synergistic Pose Estimation and Object Detection:</strong> In the initial stage, our system leverages synergistic pose estimation and object detection to incorporate context class results effectively. This improves the accuracy of the pose information and helps bridge the gap between different scenes.
+        </li>
+        <li>
+          <strong>Pose Sequence Generation:</strong> The system creates a series of pose sequences by effectively mapping the prior pose and class results. These pose sequences are further processed to generate more accurate and reliable data for subsequent stages.
+        </li>
+        <li>
+          <strong>Spatio-Temporal Graph Convolutional Auto-Encoder (ST-GCAE):</strong> The generated pose sequences are then input into a spatial and temporal graph convolutional auto-encoder (ST-GCAE), a state-of-the-art model that excels at learning spatio-temporal feature representations. Based on these pose sequences, the ST-GCAE is trained to recognize normal human behaviours. It identifies patterns and relationships between the poses over time and space.
+        </li>
+        <li>
+          <strong>Activity Clustering:</strong> A fully connected layer is appended to the ST-GCAE output to cluster human-related activities. This layer helps to group similar activities together and differentiate them from potentially abnormal events.
+        </li>
+        <li>
+          <strong>Abnormality Detection:</strong> In the final decision-making stage, the system makes a determination on the abnormality of events at the frame level. This is done based on the integrated normality scores from the ST-GCAE and the object detection module. An event is flagged as abnormal if it deviates significantly from the learned normal patterns.
+        </li>
+      </ol>
+    </section>
+    
+    <section id="results">
+      <h2>Results</h2>
+      <div class="results">
+        <p>The proposed method achieves state-of-the-art performance on multiple datasets:</p>
+        <p><strong>ShanghaiTech Campus:</strong> 84.6% AUC (highest performance)</p>
+        <p><strong>UCSD PED2:</strong> 96.9% AUC</p>
+        <p><strong>UCSD PED1:</strong> 74.8% AUC</p>
+        <p>These results confirm the robustness and effectiveness of our proposed framework for cross-scene abnormal event detection.</p>
+      </div>
+    </section>
+    
+    <section id="contributors">
+      <h2>Contributors</h2>
+      <div class="contributors">
+        <div class="contributor">
+          <img src="assets/contri-1.jpg" alt="Yuxing Yang">
+          <div class="contributor-name">Yuxing Yang</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-2.jpg" alt="Leiyu Xie">
+          <div class="contributor-name">Leiyu Xie</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-3.jpg" alt="Zeyu Fu">
+          <div class="contributor-name">Zeyu Fu</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-4.jpg" alt="Jiawei Yan">
+          <div class="contributor-name">Jiawei Yan</div>
+        </div>
+        <div class="contributor">
+          <img src="assets/contri-5.jpg" alt="Syed Mohsen Naqvi">
+          <div class="contributor-name">Syed Mohsen Naqvi</div>
+        </div>
+      </div>
+
+      <section id="publication" class="publication-section">
+        <div class="publication-links">
+          <a href="https://doi.org/10.1016/j.neucom.2024.128673" target="_blank" class="read-more">View Paper</a>
+          <button class="toggle-bibtex" onclick="toggleBibtex(this)">Show BibTeX</button>
+        </div>
+        <pre class="bibtex-content">@article{YANG2025128673,
+          title = {Pose-oriented scene-adaptive matching for abnormal event detection},
+          journal = {Neurocomputing},
+          volume = {611},
+          pages = {128673},
+          year = {2025},
+          issn = {0925-2312},
+          doi = {https://doi.org/10.1016/j.neucom.2024.128673},
+          url = {https://www.sciencedirect.com/science/article/pii/S0925231224014449},
+          author = {Yuxing Yang and Leiyu Xie and Zeyu Fu and Jiawei Yan and Syed Mohsen Naqvi},
+          keywords = {Abnormal event detection, Scene-adaptive, Pose estimation, Object detection, Graph convolutions}}
+        </pre>
+    </section>
+
+    <footer>
+      <p>© 2025 Multimodal Intelligence Lab, UK | Department of Computer Science, University of Exeter</p>
+    </footer>
+
+    <script>
+      // Image Modal Functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const modalTrigger = document.getElementById('figure-modal-trigger');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.modal-close');
+        const originalImage = document.querySelector('.figure-placeholder img');
+  
+        // Open modal
+        modalTrigger.onclick = function() {
+          modal.style.display = 'block';
+          modalImage.src = originalImage.src;
+        }
+  
+        // Close modal when clicking close button
+        closeBtn.onclick = function() {
+          modal.style.display = 'none';
+        }
+  
+        // Close modal when clicking outside the image
+        modal.onclick = function(event) {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        }
+  
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+          }
+        });
+      });
+
+      // BibTeX Toggle Function
+      function toggleBibtex(button) {
+        const bibtexContent = button.closest('#publication').querySelector('.bibtex-content');
+        if (bibtexContent.style.display === 'none') {
+          bibtexContent.style.display = 'block';
+          button.textContent = 'Hide BibTeX';
+        } else {
+          bibtexContent.style.display = 'none';
+          button.textContent = 'Show BibTeX';
+        }
+      }
+    </script>
+  
+  </div>
+</body>
+</html>
